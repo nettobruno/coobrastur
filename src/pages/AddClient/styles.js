@@ -3,6 +3,7 @@ import { Form } from '@unform/web';
 
 export const Header = styled.div`
   background-color: #08436f;
+  margin-bottom: 100px;
 
   div {
     display: flex;
@@ -14,11 +15,22 @@ export const Header = styled.div`
     color: white;
     margin-left: 5px;
   }
+
+  @media (max-width: 600px) {
+    .block-logout img {
+      position: absolute;
+      top: 30px;
+      right: 10px;
+      width: 20px;
+    }
+
+    .block-logout p {
+      display: none;
+    }
+  }
 `;
 
 export const Container = styled.div`
-  margin-top: 100px;
-
   h1 {
     color: #08436f;
     font-size: 22px;
@@ -46,11 +58,14 @@ export const FormContent = styled(Form)`
   flex-direction: column;
   width: 400px;
   margin: 50px 0;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const Inline = styled.div`
   display: flex;
-  /* flex-direction: column; */
 `;
 
 export const Button = styled.button`

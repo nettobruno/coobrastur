@@ -66,5 +66,13 @@ export default createGlobalStyle`
     @media(max-width: 650px) {
       max-width: 500px;
     }
+
+    @media(max-width: 550px) {
+      max-width: 400px;
+    }
+
+    @media(max-width: 450px) {
+      max-width: 300px;
+    }
   }
 `;
