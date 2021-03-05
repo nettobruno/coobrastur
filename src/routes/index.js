@@ -12,7 +12,7 @@ import AddClient from '../pages/AddClient';
 export default function App() {
   // const user = useSelector(state => state.user);
   // const { signed } = user;
-  const signed = false;
+  const signed = true;
 
   return (
     <Router basename="/">

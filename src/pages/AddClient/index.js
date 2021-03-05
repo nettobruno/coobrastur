@@ -6,8 +6,8 @@ import SimpleInput from '../../components/SimpleInput';
 
 // Images
 import logo from '../../assets/logo-grey.svg';
-import logout from '../../assets/logout.png';
-import user from '../../assets/user.png';
+import logout from '../../assets/logout.svg';
+import user from '../../assets/user.svg';
 
 // Styles
 import {

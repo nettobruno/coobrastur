@@ -20,6 +20,7 @@ export const Content = styled.div`
     width: 50%;
     margin-bottom: 40px;
   }
+
   @media (max-width: 600px) {
     img {
       width: 80%;
