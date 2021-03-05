@@ -16,20 +16,20 @@ export default function App() {
 
   return (
     <Router basename="/">
-      {signed ? (
+      {!signed ? (
         <Switch>
           <Route path="/" exact>
+            <Login />
+          </Route>
+        </Switch>
+      ) : (
+        <Switch>
+          <Route path="/home">
             <Home />
           </Route>
 
           <Route path="/addclient">
             <AddClient />
-          </Route>
-        </Switch>
-      ) : (
-        <Switch>
-          <Route path="/login">
-            <Login />
           </Route>
         </Switch>
       )}

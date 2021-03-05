@@ -16,6 +16,19 @@ function Login() {
   const formRef = useRef();
 
   async function handleFormSubmit(data) {
+    if (data.email === '') {
+      showToast({
+        type: 'error',
+        message: 'O campo de E-mail é obrigatório',
+      });
+    }
+    if (data.password === '') {
+      showToast({
+        type: 'error',
+        message: 'O campo de Senha é obrigatório',
+      });
+    }
+
     try {
       const response = await api.post('/api/login', {
         email: data.email,
