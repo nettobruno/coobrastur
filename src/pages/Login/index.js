@@ -21,12 +21,16 @@ function Login() {
         type: 'error',
         message: 'O campo de E-mail é obrigatório',
       });
+
+      return;
     }
     if (data.password === '') {
       showToast({
         type: 'error',
         message: 'O campo de Senha é obrigatório',
       });
+
+      return;
     }
 
     try {

@@ -1,8 +1,11 @@
 // Dependencies
 import React, { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import api from '../../services/api';
 
 // Components
 import SimpleInput from '../../components/SimpleInput';
+import { showToast } from '../../components/Alert';
 
 // Images
 import logo from '../../assets/logo-grey.svg';
@@ -20,10 +23,48 @@ import {
 } from './styles';
 
 function AddClient() {
+  const history = useHistory();
   const formRef = useRef();
 
   async function handleFormSubmit(data) {
-    console.log(data);
+    if (data.name === '') {
+      showToast({
+        type: 'error',
+        message: 'O campo de Nome é obrigatório',
+      });
+
+      return;
+    }
+    if (data.profession === '') {
+      showToast({
+        type: 'error',
+        message: 'O campo de Profissão é obrigatório',
+      });
+
+      return;
+    }
+
+    try {
+      const response = await api.post('/api/users', {
+        name: data.name,
+        job: data.profession,
+      });
+
+      console.log(response.data);
+
+      showToast({
+        type: 'success',
+        message: 'Cadastro realizado com sucesso!',
+      });
+
+      history.push('/home');
+    } catch (err) {
+      console.log(err);
+      showToast({
+        type: 'error',
+        message: 'Ops, algo deu errado. Tente Novamente!',
+      });
+    }
   }
 
   return (
@@ -53,7 +94,9 @@ function AddClient() {
           <SimpleInput name="profession" label="Profissão" />
           <Inline>
             <Button type="submit">Cadastrar</Button>
-            <ButtonOutline type="button">Voltar</ButtonOutline>
+            <ButtonOutline type="button" onClick={() => history.push('/home')}>
+              Voltar
+            </ButtonOutline>
           </Inline>
         </FormContent>
       </Container>
