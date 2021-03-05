@@ -20,6 +20,11 @@ export const Content = styled.div`
     width: 50%;
     margin-bottom: 40px;
   }
+  @media (max-width: 600px) {
+    img {
+      width: 80%;
+    }
+  }
 `;
 
 export const FormContent = styled(Form)`
@@ -27,6 +32,10 @@ export const FormContent = styled(Form)`
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
+
+  @media (max-width: 600px) {
+    width: 80%;
+  }
 `;
 
 export const Button = styled.button`
