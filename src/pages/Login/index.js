@@ -1,5 +1,9 @@
 // Dependencies
 import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import * as userActions from '../../store/ducks/auth';
+
 import api from '../../services/api';
 
 // Components
@@ -14,6 +18,8 @@ import { Container, Content, FormContent, Button } from './styles';
 
 function Login() {
   const formRef = useRef();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   async function handleFormSubmit(data) {
     if (data.email === '') {
@@ -40,16 +46,15 @@ function Login() {
       });
 
       const { token } = response.data;
-      console.log(token);
 
-      // dispatch(userActions.login(jwt));
+      dispatch(userActions.login(token));
 
       showToast({
         type: 'success',
         message: 'Login realizado com sucesso!',
       });
 
-      // history.push('/dashboard');
+      history.push('/home');
     } catch (err) {
       console.log(err);
       showToast({

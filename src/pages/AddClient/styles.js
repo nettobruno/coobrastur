@@ -11,6 +11,15 @@ export const Header = styled.div`
     align-items: center;
   }
 
+  .block-logout {
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
   .block-logout p {
     color: white;
     margin-left: 5px;

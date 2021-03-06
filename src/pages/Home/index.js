@@ -1,6 +1,8 @@
 // Dependencies
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as userActions from '../../store/ducks/auth';
 import api from '../../services/api';
 
 // Images
@@ -8,6 +10,8 @@ import logo from '../../assets/logo-grey.svg';
 import logout from '../../assets/logout.svg';
 import user from '../../assets/user.svg';
 import add from '../../assets/add.svg';
+// components
+import { showToast } from '../../components/Alert';
 
 // Styles
 import {
@@ -25,11 +29,21 @@ function Home() {
   const [users, setUsers] = useState([]);
   const [totalUsers, setTotalUsers] = useState(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   async function getAllUsers() {
     const response = await api.get(`/api/users?page=${page}`);
     setUsers(response.data.data);
     setTotalUsers(response.data.total);
+  }
+
+  function logoutUser() {
+    dispatch(userActions.login(null));
+    history.push('/');
+    showToast({
+      type: 'success',
+      message: 'Você saiu da sua conta com sucesso!',
+    });
   }
 
   useEffect(() => {
@@ -48,10 +62,14 @@ function Home() {
               <p>Novo Cliente</p>
             </button>
 
-            <div className="block-logout">
+            <button
+              type="button"
+              className="block-logout"
+              onClick={() => logoutUser()}
+            >
               <img src={logout} alt="" />
               <p>Sair</p>
-            </div>
+            </button>
           </div>
         </div>
       </Header>

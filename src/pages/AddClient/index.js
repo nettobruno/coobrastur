@@ -1,6 +1,8 @@
 // Dependencies
 import React, { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import * as userActions from '../../store/ducks/auth';
 import api from '../../services/api';
 
 // Components
@@ -25,6 +27,7 @@ import {
 function AddClient() {
   const history = useHistory();
   const formRef = useRef();
+  const dispatch = useDispatch();
 
   async function handleFormSubmit(data) {
     if (data.name === '') {
@@ -67,16 +70,29 @@ function AddClient() {
     }
   }
 
+  function logoutUser() {
+    dispatch(userActions.login(null));
+    history.push('/');
+    showToast({
+      type: 'success',
+      message: 'Você saiu da sua conta com sucesso!',
+    });
+  }
+
   return (
     <>
       <Header>
         <div className="container">
           <img src={logo} alt="" />
 
-          <div className="block-logout">
+          <button
+            type="button"
+            className="block-logout"
+            onClick={() => logoutUser()}
+          >
             <img src={logout} alt="" />
             <p>Sair</p>
-          </div>
+          </button>
         </div>
       </Header>
 

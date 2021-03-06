@@ -11,6 +11,8 @@ export const Header = styled.div`
   }
 
   button {
+    display: flex;
+
     border-radius: 9px;
     background-color: #f8fcff;
     color: #534c4c;
@@ -27,9 +29,15 @@ export const Header = styled.div`
     }
   }
 
+  .block-logout {
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+  }
+
   .block-logout p {
     color: white;
-    margin-left: 5px;
   }
 
   @media (max-width: 600px) {
