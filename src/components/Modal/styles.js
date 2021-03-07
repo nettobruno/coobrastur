@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Form } from '@unform/web';
 
 export const Container = styled.div`
-  z-index: 11;
+  z-index: 10;
   background: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
@@ -21,27 +21,9 @@ export const Content = styled.div`
   padding: 20px 40px;
 
   h2 {
-    color: #391463;
-    font-size: 24px;
-    font-weight: 500;
-  }
-
-  p {
-    color: #57476e;
-    font-size: 14px;
-    font-weight: 300;
-    margin: 15px 0;
-  }
-
-  .cancel {
-    border: 1px solid #57476e;
-    border-radius: 20px;
-    padding: 5px 15px;
-    color: #57476e;
-    margin-right: 10px;
-
-    font-weight: 500;
-    font-size: 14px;
+    color: #08436f;
+    font-size: 22px;
+    font-weight: 700;
   }
 `;
 
@@ -71,6 +53,7 @@ export const Button = styled.button`
 export const ButtonOutline = styled.button`
   border: 1px solid #08436f;
   border-radius: 10px;
+  background-color: white;
   color: #08436f;
 
   font-size: 14px;

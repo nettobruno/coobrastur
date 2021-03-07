@@ -1,11 +1,14 @@
+// Dependencias
 import React, { useRef, useEffect } from 'react';
 import { useField } from '@unform/core';
 
+// Styles
 import { InputStyle } from './style';
 
 export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
+
   useEffect(() => {
     registerField({
       name: fieldName,
@@ -19,6 +22,7 @@ export default function Input({ name, label, ...rest }) {
       },
     });
   }, [fieldName, registerField]);
+
   return (
     <>
       <label htmlFor={fieldName}>{label}</label>
