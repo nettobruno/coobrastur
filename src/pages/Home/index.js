@@ -12,6 +12,7 @@ import user from '../../assets/user.svg';
 import add from '../../assets/add.svg';
 // components
 import { showToast } from '../../components/Alert';
+import Modal from '../../components/Modal';
 
 // Styles
 import {
@@ -25,8 +26,10 @@ import {
 } from './styles';
 
 function Home() {
+  const [modal, setModal] = useState(false);
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
+  const [singleUser, setSingleUser] = useState({});
   const [totalUsers, setTotalUsers] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,7 +37,13 @@ function Home() {
   async function getAllUsers() {
     const response = await api.get(`/api/users?page=${page}`);
     setUsers(response.data.data);
-    setTotalUsers(response.data.total);
+    setTotalUsers(response.data.per_page);
+  }
+
+  async function getSingleUser(id) {
+    const response = await api.get(`/api/users/${id}`);
+    setSingleUser(response.data.data);
+    console.log(response.data.data);
   }
 
   function logoutUser() {
@@ -75,6 +84,8 @@ function Home() {
       </Header>
 
       <Container className="container">
+        <Modal setModal={setModal} modal={modal} singleUser={singleUser} />
+
         <h1>
           <img src={user} alt="" />
           Painel de Clientes
@@ -90,7 +101,15 @@ function Home() {
                 </p>
                 <p>{u.email}</p>
 
-                <Button type="button">Editar</Button>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    getSingleUser(u.id);
+                    setModal(true);
+                  }}
+                >
+                  Editar
+                </Button>
               </BlockUser>
             ))}
           </ContentUsers>
