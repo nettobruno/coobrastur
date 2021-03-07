@@ -31,6 +31,8 @@ function Home() {
   const [users, setUsers] = useState([]);
   const [singleUser, setSingleUser] = useState({});
   const [totalUsers, setTotalUsers] = useState(null);
+  const [totalPages, setTotalPages] = useState();
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -38,12 +40,12 @@ function Home() {
     const response = await api.get(`/api/users?page=${page}`);
     setUsers(response.data.data);
     setTotalUsers(response.data.per_page);
+    setTotalPages(response.data.total_pages);
   }
 
   async function getSingleUser(id) {
     const response = await api.get(`/api/users/${id}`);
     setSingleUser(response.data.data);
-    console.log(response.data.data);
   }
 
   function logoutUser() {
@@ -53,6 +55,22 @@ function Home() {
       type: 'success',
       message: 'Você saiu da sua conta com sucesso!',
     });
+  }
+
+  function nextPage() {
+    setPage(page + 1);
+
+    if (page >= totalPages) {
+      setPage(totalPages);
+    }
+  }
+
+  function backPage() {
+    setPage(page - 1);
+
+    if (page < 1) {
+      setPage(page + 1);
+    }
   }
 
   useEffect(() => {
@@ -120,10 +138,10 @@ function Home() {
         </Total>
 
         <Buttons>
-          <Button type="button" onClick={() => setPage(page - 1)}>
+          <Button type="button" onClick={() => backPage()}>
             Anterior
           </Button>
-          <Button type="button" onClick={() => setPage(page + 1)}>
+          <Button type="button" onClick={() => nextPage()}>
             Próximo
           </Button>
         </Buttons>
