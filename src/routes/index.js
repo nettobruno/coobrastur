@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import AddClient from '../pages/AddClient';
-import EditClient from '../pages/EditClient';
 
 export default function App() {
   const { token } = useSelector((state) => state.auth);
@@ -28,10 +27,6 @@ export default function App() {
 
           <Route path="/addclient">
             <AddClient />
-          </Route>
-
-          <Route path="/editclient">
-            <EditClient />
           </Route>
         </Switch>
       )}

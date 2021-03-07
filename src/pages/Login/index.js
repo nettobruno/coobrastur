@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as userActions from '../../store/ducks/auth';
@@ -9,6 +9,7 @@ import api from '../../services/api';
 // Components
 import SimpleInput from '../../components/SimpleInput';
 import { showToast } from '../../components/Alert';
+import Loader from '../../components/Loader';
 
 // Images
 import logo from '../../assets/logo.svg';
@@ -20,6 +21,7 @@ function Login() {
   const formRef = useRef();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loader, setLoader] = useState(false);
 
   async function handleFormSubmit(data) {
     if (data.email === '') {
@@ -40,6 +42,7 @@ function Login() {
     }
 
     try {
+      setLoader(true);
       const response = await api.post('/api/login', {
         email: data.email,
         password: data.password,
@@ -55,18 +58,22 @@ function Login() {
       });
 
       history.push('/home');
+      setLoader(false);
     } catch (err) {
       console.log(err);
       showToast({
         type: 'error',
         message: 'Ops, algo deu errado. Tente Novamente!',
       });
+
+      setLoader(false);
     }
   }
 
   return (
     <Container>
       <Content>
+        <Loader loader={loader} />
         <img src={logo} alt="Logo Coobrastur" />
         <FormContent ref={formRef} onSubmit={handleFormSubmit}>
           <SimpleInput name="email" label="E-mail" type="text" />

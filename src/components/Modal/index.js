@@ -1,10 +1,11 @@
 // Dependencies
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import api from '../../services/api';
 
 // Components
 import SimpleInput from '../SimpleInput';
 import { showToast } from '../Alert';
+import Loader from '../Loader';
 
 // Styles
 import {
@@ -17,6 +18,7 @@ import {
 
 function Modal({ setModal, modal, singleUser }) {
   const formRef = useRef();
+  const [loader, setLoader] = useState(false);
 
   async function editUser(data, { reset }) {
     if (data.name === '') {
@@ -37,6 +39,7 @@ function Modal({ setModal, modal, singleUser }) {
     }
 
     try {
+      setLoader(true);
       await api.put(`/api/users/${singleUser.id}`, {
         name: data.name,
         job: data.job,
@@ -48,6 +51,7 @@ function Modal({ setModal, modal, singleUser }) {
       });
 
       setModal(false);
+      setLoader(false);
       reset();
     } catch (err) {
       console.log(err);
@@ -56,11 +60,14 @@ function Modal({ setModal, modal, singleUser }) {
         message: 'Ops, algo deu errado. Tente Novamente!',
       });
       reset();
+      setLoader(false);
     }
   }
 
   return (
     <Container visible={modal}>
+      <Loader loader={loader} />
+
       <Content>
         <h2>Editando usuário: {singleUser.first_name}</h2>
 

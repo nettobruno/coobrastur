@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as userActions from '../../store/ducks/auth';
@@ -8,6 +8,7 @@ import api from '../../services/api';
 // Components
 import SimpleInput from '../../components/SimpleInput';
 import { showToast } from '../../components/Alert';
+import Loader from '../../components/Loader';
 
 // Images
 import logo from '../../assets/logo-grey.svg';
@@ -28,6 +29,7 @@ function AddClient() {
   const history = useHistory();
   const formRef = useRef();
   const dispatch = useDispatch();
+  const [loader, setLoader] = useState(false);
 
   async function handleFormSubmit(data) {
     if (data.name === '') {
@@ -48,6 +50,8 @@ function AddClient() {
     }
 
     try {
+      setLoader(true);
+
       const response = await api.post('/api/users', {
         name: data.name,
         job: data.profession,
@@ -61,12 +65,14 @@ function AddClient() {
       });
 
       history.push('/home');
+      setLoader(false);
     } catch (err) {
       console.log(err);
       showToast({
         type: 'error',
         message: 'Ops, algo deu errado. Tente Novamente!',
       });
+      setLoader(false);
     }
   }
 
@@ -97,6 +103,8 @@ function AddClient() {
       </Header>
 
       <Container className="container">
+        <Loader loader={loader} />
+
         <h1>
           <img src={user} alt="" />
           Painel de Clientes
