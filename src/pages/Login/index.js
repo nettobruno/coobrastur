@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as userActions from '../../store/ducks/auth';
-
 import api from '../../services/api';
 
 // Components

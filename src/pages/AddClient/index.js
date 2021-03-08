@@ -51,13 +51,10 @@ function AddClient() {
 
     try {
       setLoader(true);
-
-      const response = await api.post('/api/users', {
+      await api.post('/api/users', {
         name: data.name,
         job: data.profession,
       });
-
-      console.log(response.data);
 
       showToast({
         type: 'success',
@@ -80,7 +77,7 @@ function AddClient() {
     dispatch(userActions.login(null));
     history.push('/');
     showToast({
-      type: 'success',
+      type: 'info',
       message: 'Você saiu da sua conta com sucesso!',
     });
   }

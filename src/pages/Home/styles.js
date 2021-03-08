@@ -10,7 +10,7 @@ export const Header = styled.div`
     align-items: center;
   }
 
-  button {
+  .add {
     display: flex;
 
     border-radius: 9px;
@@ -34,14 +34,17 @@ export const Header = styled.div`
 
     display: flex;
     align-items: center;
+
+    cursor: pointer;
   }
 
   .block-logout p {
     color: white;
+    margin-left: 5px;
   }
 
   @media (max-width: 600px) {
-    button {
+    .add {
       padding: 10px;
       margin-right: 10px;
 

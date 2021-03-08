@@ -84,7 +84,11 @@ function Home() {
           <img src={logo} alt="" />
 
           <div>
-            <button type="button" onClick={() => history.push('/addclient')}>
+            <button
+              type="button"
+              className="add"
+              onClick={() => history.push('/addclient')}
+            >
               <img src={add} alt="" />
               <p>Novo Cliente</p>
             </button>
@@ -113,7 +117,7 @@ function Home() {
           <ContentUsers>
             {users.map((u) => (
               <BlockUser key={u.id}>
-                <img src={u.avatar} alt="" />
+                <img src={u.avatar} alt="User avatar" />
                 <p className="name">
                   {u.first_name} {u.last_name}
                 </p>
